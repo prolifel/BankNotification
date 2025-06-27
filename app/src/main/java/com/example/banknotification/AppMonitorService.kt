@@ -12,7 +12,11 @@ import androidx.core.app.NotificationCompat
 
 class AppMonitorService : Service() {
   private var wasTargetAppOpen = false
-  private val targetPackage = "com.instagram.android"
+  private val targetPackage: String
+    get() {
+      val prefs = getSharedPreferences("app_monitor", MODE_PRIVATE)
+      return prefs.getString("target_package", "") ?: ""
+    }
 
   override fun onCreate() {
     super.onCreate()
