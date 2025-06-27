@@ -1,8 +1,6 @@
 package com.example.banknotification
 
 import android.app.AppOpsManager
-import android.app.usage.UsageStats
-import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,20 +11,6 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
-import com.example.banknotification.ui.theme.BankNotificationTheme
 import androidx.core.content.edit
 
 class MainActivity : ComponentActivity() {

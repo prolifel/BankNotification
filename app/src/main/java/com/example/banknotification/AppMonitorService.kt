@@ -3,10 +3,12 @@ package com.example.banknotification
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 
@@ -82,6 +84,18 @@ class AppMonitorService : Service() {
     val manager = getSystemService(NotificationManager::class.java)
     manager.createNotificationChannel(channel)
 
+    val formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeEmiFSCg36W_8_6kn9Vy-dHbMA4dxlP0ztujl5RVhIIP5w4g/viewform"
+
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+      data = Uri.parse(formUrl)
+      flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    }
+
+    val pendingIntent = PendingIntent.getActivity(
+      this, 0, intent,
+      PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+    )
+
     val builder = NotificationCompat.Builder(this, channelId)
       .setSmallIcon(android.R.drawable.ic_dialog_info)
       .setContentTitle(title)
@@ -90,6 +104,7 @@ class AppMonitorService : Service() {
       .setCategory(NotificationCompat.CATEGORY_MESSAGE)
       .setAutoCancel(true)
       .setDefaults(NotificationCompat.DEFAULT_ALL)
+      .setContentIntent(pendingIntent)
 
     manager.notify(2, builder.build())
   }
